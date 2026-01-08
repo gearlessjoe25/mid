@@ -1,0 +1,48 @@
+/* Unified Panel Background */
+.panel {
+    background: rgba(30, 30, 30, 0.75);
+    border: 1px solid rgba(100, 79, 154, 0.35);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Header Layout */
+.header-flex {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.character-portrait {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    object-fit: cover;
+    box-shadow: 0 0 25px var(--shadow-glow);
+    background: rgba(0,0,0,0.6);
+}
+
+/* Appearance Image */
+.appearance-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 25px;
+}
+
+.appearance-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    object-fit: cover;
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 20px var(--shadow-glow);
+}
+
+@media (max-width: 768px) {
+    .appearance-layout {
+        grid-template-columns: 1fr;
+    }
+}

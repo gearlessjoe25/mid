@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.I.D. Restricted Access</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#07080a;
+    --panel:#13161b;
+    --gold:#c2364c;
+    --text:#d4cfc3;
+    --error:#ff4c4c;
+    --success:#4cff9b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+    background:var(--bg);
+    font-family:'Orbitron',sans-serif;
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+/* SCANLINES */
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03) 0px,
+        rgba(255,255,255,.03) 1px,
+        transparent 3px,
+        transparent 5px
+    );
+    animation:scan 7s linear infinite;
+    pointer-events:none;
+}
+@keyframes scan{to{background-position:0 100%;}}
+
+.vault{
+    width:380px;
+    background:linear-gradient(145deg,#0f1217,#07090c);
+    border:2px solid var(--gold);
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 0 35px rgba(194,54,76,.35);
+    position:relative;
+}
+
+.vault.alarm{animation:shake .25s infinite;}
+@keyframes shake{
+    0%{transform:translateX(-2px);}
+    50%{transform:translateX(2px);}
+    100%{transform:translateX(-2px);}
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+.title{color:var(--gold);font-size:1.4rem;}
+.record{
+    font-size:.7rem;
+    color:#ff5f5f;
+}
+.record::before{
+    content:"● ";
+    animation:blink 1s infinite;
+}
+@keyframes blink{50%{opacity:.3;}}
+
+.meta{
+    font-size:.65rem;
+    opacity:.7;
+    margin-bottom:10px;
+}
+
+/* DISPLAY */
+.display{
+    background:#000;
+    border:1px solid var(--gold);
+    padding:14px;
+    font-size:1.6rem;
+    letter-spacing:10px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+/* PROGRESS */
+.progress{
+    display:none;
+    border:1px solid var(--gold);
+    height:10px;
+    margin-bottom:10px;
+}
+.bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--gold),#ff7b8a);
+}
+
+/* KEYPAD */
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+.key{
+    background:var(--panel);
+    border:1px solid var(--gold);
+    padding:12px;
+    border-radius:6px;
+    cursor:pointer;
+    color:var(--text);
+}
+.key:hover{background:#1b1f27;}
+.key:active{transform:scale(.96);}
+
+.num{
+    font-size:1.3rem;
+    font-weight:600;
+    color:#ffffff;
+}
+.letters{
+    font-size:.65rem;
+    color:#cfcfcf;
+    letter-spacing:1px;
+}
+
+.control{
+    grid-column:span 3;
+    background:#1a1e26;
+}
+
+/* STATUS */
+.status{
+    font-size:.75rem;
+    min-height:18px;
+    margin-top:10px;
+}
+.status.error{color:var(--error);}
+.status.success{color:var(--success);}
+.status.info{color:#9fbfff;}
+
+/* AUDIT */
+.audit{
+    font-size:.6rem;
+    opacity:.55;
+    margin-top:10px;
+    line-height:1.4;
+}
+</style>
+</head>
+
+<body>
+<div id="vault" class="vault">
+    <div class="header">
+        <div class="title">M.I.D. DATABASE</div>
+        <div class="record">RECORDING</div>
+    </div>
+
+    <div class="meta">
+        NODE: VAULT-03A<br>
+        TRACE: 172.16.44.203 • CHANTILLY, VA
+    </div>
+
+    <div id="display" class="display">____</div>
+
+    <div id="progress" class="progress">
+        <div id="bar" class="bar"></div>
+    </div>
+
+    <div class="keypad">
+        <button class="key" onclick="press('1')"><div class="num">1</div></button>
+        <button class="key" onclick="press('2')"><div class="num">2</div><div class="letters">ABC</div></button>
+        <button class="key" onclick="press('3')"><div class="num">3</div><div class="letters">DEF</div></button>
+
+        <button class="key" onclick="press('4')"><div class="num">4</div><div class="letters">GHI</div></button>
+        <button class="key" onclick="press('5')"><div class="num">5</div><div class="letters">JKL</div></button>
+        <button class="key" onclick="press('6')"><div class="num">6</div><div class="letters">MNO</div></button>
+
+        <button class="key" onclick="press('7')"><div class="num">7</div><div class="letters">PQRS</div></button>
+        <button class="key" onclick="press('8')"><div class="num">8</div><div class="letters">TUV</div></button>
+        <button class="key" onclick="press('9')"><div class="num">9</div><div class="letters">WXYZ</div></button>
+
+        <button class="key" onclick="press('*')"><div class="num">*</div></button>
+        <button class="key" onclick="press('0')"><div class="num">0</div></button>
+        <button class="key" onclick="press('#')"><div class="num">#</div></button>
+
+        <button class="key control" onclick="enter()">ENTER</button>
+        <button class="key control" onclick="reset()">CLEAR</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div class="audit" id="audit">
+        [LOG] SESSION OPENED<br>
+    </div>
+</div>
+
+<script>
+const CODE="6689";
+let input="", attempts=0, locked=false;
+
+const vault=document.getElementById("vault");
+const display=document.getElementById("display");
+const status=document.getElementById("status");
+const progress=document.getElementById("progress");
+const bar=document.getElementById("bar");
+const audit=document.getElementById("audit");
+
+const ctx=new (window.AudioContext||window.webkitAudioContext)();
+function beep(f=700,d=.06){
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.frequency.value=f;
+    o.connect(g);g.connect(ctx.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d);
+    o.stop(ctx.currentTime+d);
+}
+
+function log(msg){
+    audit.innerHTML+=`[LOG] ${msg}<br>`;
+}
+
+function press(k){
+    if(locked||input.length>=4)return;
+    beep();
+    input+=k;
+    display.textContent=(input+"____").slice(0,4);
+}
+
+function enter(){
+    if(input==="*#06#"){
+        status.textContent="M.I.D. TERMINAL v3.7";
+        status.className="status info";
+        log("SYSTEM IDENT REQUEST");
+        beep(1200,.3);
+        reset(true);
+        return;
+    }
+    if(input.length!==4||locked)return;
+    scan();
+}
+
+function scan(){
+    status.textContent="VERIFYING CREDENTIALS...";
+    progress.style.display="block";
+    bar.style.width="0%";
+    log("AUTH SCAN INITIATED");
+    let p=0;
+    const t=setInterval(()=>{
+        p+=Math.random()*30;
+        bar.style.width=Math.min(p,100)+"%";
+        beep(350,.04);
+        if(p>=100){
+            clearInterval(t);
+            finish();
+        }
+    },250);
+}
+
+function finish(){
+    progress.style.display="none";
+    if(input===CODE){
+        status.textContent="ACCESS GRANTED";
+        status.className="status success";
+        log("ACCESS GRANTED");
+        beep(1300,.3);
+        setTimeout(()=>location.href="mid.html",1500);
+    }else{
+        attempts++;
+        vault.classList.add("alarm");
+        status.textContent="ACCESS DENIED";
+        status.className="status error";
+        log("ACCESS DENIED");
+        beep(150,.4);
+        setTimeout(()=>vault.classList.remove("alarm"),600);
+        if(attempts>=3){
+            locked=true;
+            status.textContent="TERMINAL LOCKED (10s)";
+            log("LOCKOUT ENABLED");
+            setTimeout(()=>{locked=false;attempts=0;reset();},10000);
+        }else setTimeout(reset,1200);
+    }
+}
+
+function reset(soft=false){
+    input="";
+    display.textContent="____";
+    if(!soft)status.textContent="";
+}
+</script>
+</body>
+</html>

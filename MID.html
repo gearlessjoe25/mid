@@ -1,0 +1,666 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>M.I.D Campaign Hub - Monsters Investigation Division</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&amp;family=Unna:wght@400;700&amp;family=Quattrocento+Sans:wght@400;700&amp;family=Sorts+Mill+Goudy:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="MID.css">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --primary-color: #c2364c;
+            --secondary-color: #6D7B8D;
+            --accent-color: #8A9B8C;
+            --text-light: #d4c3c3;
+            --text-dark: #1E1E1E;
+            --shadow-glow: rgba(194, 54, 76, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quattrocento Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(154, 126, 79, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(138, 155, 140, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .main-title {
+            font-family: 'Oranienbaum', serif;
+            font-size: 4rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 40px var(--shadow-glow);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-family: 'Unna', serif;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.8) 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 60px 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%239A7E4F" stroke-width="0.5" opacity="0.1"/><circle cx="50" cy="50" r="30" fill="none" stroke="%239A7E4F" stroke-width="0.3" opacity="0.1"/></svg>') center/300px repeat;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-family: 'Oranienbaum', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .access-level {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--text-dark);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        /* Section Headers */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 10px var(--shadow-glow));
+        }
+
+        .section-title {
+            font-family: 'Unna', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+
+        .section-description {
+            color: var(--secondary-color);
+            margin-left: auto;
+            font-style: italic;
+        }
+
+        /* Button Grid */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.8) 100%);
+            border: 2px solid rgba(194, 54, 76, 0.3);
+            border-radius: 12px;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .nav-button:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(194, 54, 76, 0.3);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(154, 126, 79, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .nav-button:hover::before {
+            opacity: 1;
+        }
+
+        .button-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .nav-button:hover .button-image {
+            transform: scale(1.05);
+        }
+
+        .button-content {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-title {
+            font-family: 'Unna', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-button:hover .button-title {
+            color: var(--text-light);
+        }
+
+        .button-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .button-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .button-status {
+            padding: 4px 12px;
+            border-radius: 15px;
+            background: rgba(194, 54, 76, 0.2);
+            color: var(--accent-color);
+        }
+
+        .button-type {
+            color: var(--primary-color);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 80px;
+            border-top: 1px solid rgba(194, 54, 76, 0.3);
+        }
+
+        .footer-text {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .mystical-runes {
+            margin: 15px 0;
+        }
+
+        .rune {
+            display: inline-block;
+            margin: 0 15px;
+            color: var(--primary-color);
+            font-family: 'Oranienbaum', serif;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-section {
+                padding: 40px 20px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .section-description {
+                margin-left: 0;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+    </style>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header fade-in">
+            <div class="logo-container">
+                <img src="img/enlarge_M.png" alt="M.I.D Logo" class="main-title">
+            </div>
+            <p class="subtitle">Monster Investigation Division</p>
+            <p class="tagline">&#34;In the shadows between worlds, knowledge is our only light&#34;</p>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section fade-in">
+            <h2 class="hero-title">Campaign Headquarters</h2>
+            <p class="hero-description">
+                Welcome to the central database for all operations related to supernatural threats, entity classifications, hunter profiles, and case file documentation. This hub provides access to character records, non-human entities, operational locations, session archives, and the collective lore of our ongoing investigation.
+            </p>
+            <div class="access-level">Clearance Level: Zeta</div>
+        </section>
+
+        <!-- Characters Section -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <span class="section-icon">M.I.D</span>
+                <h2 class="section-title">Characters</h2>
+                <span class="section-description">Playable Hunters</span>
+            </div>
+            
+            <div class="button-grid">
+                <a class="nav-button" href="Anasi.html">
+                    <img alt="Anasi Banyan IV" class="button-image" src="img/Anasi_Profile.png"/>
+                    <div class="button-content">
+                        <h3 class="button-title">Anasi Banyan IV</h3>
+                        <p class="button-description">Guardian of the Occultarium, head of the ancient Banyan lineage, and expert in supernatural lore. A scholar-warrior balancing family legacy with active duty.</p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">The Expert</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src="img/Angela_Profile.png"/>
+                    <div class="button-content">
+                        <h3 class="button-title">Angela Wilson</h3>
+                        <p class="button-description">Angel-turned-monster scholar, survivor of the Divine Reckoning, and protector of the Chosen. Balancing decades of knowledge in this supernatural world.</p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">The Divine</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Jerome Price</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">The Chosen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Kaigaku Kishimoto</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">MIA</span>
+                            <span class="button-type">The Monsterous</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Marcus Kane</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">I forgot</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Malistare Drake</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">The Initiate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Rosalina Nguyen</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Deceased</span>
+                            <span class="button-type">I forgot</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Socrates Tzagaris</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">I forgot</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Character Slot" class="button-image" src="img/Yuri_Profile.png"/>
+                    <div class="button-content">
+                        <h3 class="button-title">Yuri Nikola</h3>
+                        <p class="button-description">Mason of both stone and secrets, he embarks into the world of the supernatural, seeking the hidden truths behind his father’s death.</p>
+                        <div class="button-meta">
+                            <span class="button-status">Retired</span>
+                            <span class="button-type">The Mundane</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NPCs Section -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <span class="section-icon">M.I.D</span>
+                <h2 class="section-title">NPCs</h2>
+                <span class="section-description">Allies &amp; Contacts</span>
+            </div>
+            
+            <div class="button-grid">
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Vesper" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Vesper</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Ally</span>
+                            <span class="button-type">Boss</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Kimiko Nomura" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Kimiko Nomura</h3>
+                        <p class="button-description">Assistant at the Occultarium. Manages day-to-day operations while Anasi focuses on more dangerous work.</p>
+                        <div class="button-meta">
+                            <span class="button-status">Ally</span>
+                            <span class="button-type">Staff</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Locations Section -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <span class="section-icon">M.I.D</span>
+                <h2 class="section-title">Locations</h2>
+                <span class="section-description">Places of Interest</span>
+            </div>
+            
+            <div class="button-grid">
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="The M.I.D Facility" class="button-image" src="img/M.I.D Facility.png"/>
+                    <div class="button-content">
+                        <h3 class="button-title">The M.I.D Facility</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Secure</span>
+                            <span class="button-type">Headquarters</span>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="button-grid">
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="The Occultarium" class="button-image" src="img/The Occultarium.png"/>
+                    <div class="button-content">
+                        <h3 class="button-title">The Occultarium</h3>
+                        <p class="button-description">A guarded repository of rare and dangerous occult knowledge. Doubles as research hub, safehouse, and preparation site for hunts.</p>
+                        <div class="button-meta">
+                            <span class="button-status">Secure</span>
+                            <span class="button-type">Expert Lounge</span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </section>
+
+        <!-- Sessions Section -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <span class="section-icon">M.I.D</span>
+                <h2 class="section-title">Sessions</h2>
+                <span class="section-description">Mission Archives</span>
+            </div>
+            
+            <div class="button-grid">
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Current Session" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Current Investigation</h3>
+                        <p class="button-description">Active case file documenting the team&#39;s current supernatural investigation and ongoing threats.</p>
+                        <div class="button-meta">
+                            <span class="button-status">Open</span>
+                            <span class="button-type">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lore Section -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <span class="section-icon">M.I.D</span>
+                <h2 class="section-title">Lore</h2>
+                <span class="section-description">Knowledge Database</span>
+            </div>
+            
+            <div class="button-grid">
+                <div class="nav-button" onclick="showComingSoon()">
+                    <img alt="Banyan Tribe" class="button-image" src=""/>
+                    <div class="button-content">
+                        <h3 class="button-title">Banyan Tribe</h3>
+                        <p class="button-description"></p>
+                        <div class="button-meta">
+                            <span class="button-status">Active</span>
+                            <span class="button-type">Family</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer fade-in">
+            <div class="mystical-runes">
+                <span class="mystical-rune">ᚱ</span>
+                Monster Investigation Division Database
+                <span class="mystical-rune">ᚱ</span>
+            </div>
+            <p class="footer-text">
+                Confidential Personnel File • Clearance Level: Zeta<br/>
+                All information contained herein is classified. Unauthorized access will result in immediate investigation.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Immediate fade in for initial elements
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 200);
+                });
+            }, 300);
+        });
+
+        // Coming soon popup
+        function showComingSoon() {
+            alert('ðŸš§ Section Under Construction\n\nThis part of the M.I.D. database is still being compiled. Check back soon for updates.');
+        }
+
+        // Add hover sound effect simulation
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.2s ease';
+            });
+        });
+    </script>
+
+</body></html>

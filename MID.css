@@ -1,0 +1,10 @@
+.logo-container {
+    text-align: center; /* centers the image horizontally */
+    margin: 20px 0;     /* optional spacing above and below */
+}
+
+.main-title {
+    width: 400px;       /* adjust the size to fit your design */
+    max-width: 100%;    /* responsive for smaller screens */
+    height: auto;       /* keeps the image proportions */
+}
